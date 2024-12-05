@@ -100,6 +100,71 @@ class Hurricane:
         forecasted_location = (round(new_lat, 2), round(new_lon, 2))
         print(f"In {hours} hours, Hurricane {self.name} is forecasted to be at {forecasted_location}.")
         return forecasted_location
+    def classification(self, wind_speed):
+        if wind_speed >= 74 and wind_speed < 95:
+            self.category = 1
+        elif wind_speed >= 96 and wind_speed < 110:
+            self.category = 2
+        elif wind_speed >= 111 and wind_speed < 129:
+            self.category = 3
+        elif wind_speed >= 130 and wind_speed < 156:
+            self.category = 4
+        elif wind_speed > 157:
+            self.category = 5
+        return self.category
+    def evacuation_planning(self):
+
+        print("Evacuation measures need to be taken accordingly.")
+        print("Please refer to the extended hurricane classificaton below")
+        print("to determine if evacuation is immediately required.")
+        print("")
+        print("Power loss expectancy:")
+        x = 1
+        for n in self.power_loss:
+            print(f"For category {x} hurricane; Expect {n} power loss")
+            x += 1
+        print("")
+        print(f"Evacuation threshold: If category is {x - 4} or higher, you must evacuate!")
+        print("")
+        y = 1
+        print("Property Damage:")
+        for n in self.property_damage:
+            print(f"For category {y} hurricane; Expect {n} property damage")
+            y += 1
+        print("")
+        print(f"Evacuation threshold: If category is {y - 3} or higher, you must evacuate!")
+        print("Damage and/or removal of roof decking is very likely")
+        print("")
+        z = 1
+        print("Habitability of Area:")
+        for n in self.habitability:
+            print(f"If category {z}; area is considered {n}")
+            z += 1
+        print("")
+        print(f"Evacuation threshold: If category is {z - 4} or higher, you must evacuate!")
+        print("Access to water and electricity will be unavailable for prolonged time.")
+        print("")
+
+    def resource_distribution(self):
+        area_assistance = None
+        print("Distribution of resources")
+        print("The distribution of resources will depend on the severity of the hurricane")
+        print("Some areas are prioritized depending on the respective category")
+        print("")
+        print(f"Category: {self.category} (Hurricane Ian)")
+        if self.category == 4 or self.category == 5:
+            print("Victims in area are prioritized and require immediate assistance.")
+            print("Area is considered uninhabitable")
+            area_assistance = ['Water','Clothes','Food','Medicine','Transportation for medical care']
+        elif self.category == 3:
+            print("Access to water or electricity is very limited;")
+            print("Area is considered very dangerous")
+            area_assistance = ['Water','Food', 'Transportation for medical care']
+        elif self.category == 2:
+            print("Area is dangerous.")
+            area_assistance = ['Water','Food']
+
+        print(f"Resources for area: {area_assistance}")
 
 # Example Usage:
 hurricane_ian = Hurricane(
@@ -127,3 +192,10 @@ print(f"Damage Potential: {damage_potential}")
 # Forecast the future location
 forecasted_location = hurricane_ian.forecast(speed=15, direction=90, hours=5)
 # Output: In 5 hours, Hurricane Ian is forecasted to be at (25.0, -78.91)
+
+
+print("")
+hurricane_ian.classification(wind_speed=150)
+hurricane_ian.evacuation_planning()
+hurricane_ian.resource_distribution()
+
