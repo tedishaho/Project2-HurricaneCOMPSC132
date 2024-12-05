@@ -3,6 +3,10 @@ import math
 class Hurricane:
     # Categorizes various aspects of a hurricane (category, location, damage)
     def __init__(self, name, category, wind_speed, pressure, location, affected_areas):
+
+        self.power_loss = ['Some', 'Near-total', 'Total', 'long-term', 'long-term']
+        self.property_damage = ['Some', 'Extensive', 'Devastating', 'Catastrophic', 'Catastrophic']
+        self.habitability = ['Safe', 'Dangerous', 'Very Dangerous', 'Uninhabitable', 'Uninhabitable']
         """
         Initialize the Hurricane object with key attributes.
 
